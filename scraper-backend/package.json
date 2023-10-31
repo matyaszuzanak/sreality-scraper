@@ -1,0 +1,16 @@
+{
+  "name": "sreality-scraper",
+  "version": "1.0.0",
+  "description": "A simple scraper for sreality.cz",
+  "main": "scraper.js",
+  "scripts": {
+    "start": "node scraper.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+   "cors": "^2.8.5",
+    "puppeteer": "^10.4.0", 
+    "pg": "^8.7.1"
+  }
+}
+

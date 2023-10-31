@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  sreality-postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demopass1.
+      POSTGRES_DB: scrapping
+    ports:
+      - "5432:5432"
+    networks:
+      - sreality
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+
+  scraper-frontend:
+    build:
+      context: ./scraper-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    networks:
+      - sreality
+    restart: on-failure
+
+  scraper-backend:
+    build:
+      context: ./scraper-backend
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001" 
+    networks:
+      - sreality
+    depends_on:
+      - sreality-postgres
+    restart: on-failure
+
+networks:
+  sreality:
